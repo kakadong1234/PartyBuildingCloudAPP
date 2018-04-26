@@ -9,19 +9,19 @@
         <section @click = "gotoAddress({path: '/lsearch/' + geohash})" class="guide_item">
             <img v-if="selectedItem!=='search'" src="../../images/search.png" class="icon_style">  
             <img v-else src="../../images/searchSelected.png" class="icon_style"> 
-            <span v-if="selectedItem!=='search'" :style="{color: '#707070'}">搜索</span>
-            <span v-else :style="{color: '#1296db'}">搜索</span>
+            <span v-if="selectedItem!=='search'" :style="{color: '#707070'}">学习中心</span>
+            <span v-else :style="{color: '#1296db'}">学习中心</span>
         </section>
         <section @click = "gotoAddress({path: '/tenement'})" class="guide_item">
             <img v-if="selectedItem!=='tenement'" src="../../images/tenement.png" class="icon_style">  
             <img v-else src="../../images/tenementSelected.png" class="icon_style"> 
-            <span v-if="selectedItem!=='tenement'" :style="{color: '#707070'}">租房</span>
-            <span v-else :style="{color: '#1296db'}">租房</span>
+            <span v-if="selectedItem!=='tenement'" :style="{color: '#707070'}">考试中心</span>
+            <span v-else :style="{color: '#1296db'}">考试中心</span>
         </section>
         <section @click = "gotoAddress({path: '/lprofile'})" class="guide_item">
             <img v-if="selectedItem!=='profile'" src="../../images/self.png" class="icon_style">  
             <img v-else src="../../images/selfSelected.png" class="icon_style"> 
-            <span v-if="selectedItem!=='profile'" :style="{color: '#707070'}">租房</span>
+            <span v-if="selectedItem!=='profile'" :style="{color: '#707070'}">我的</span>
             <span v-else :style="{color: '#1296db'}">我的</span>
         </section>
     </section>

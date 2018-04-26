@@ -3,22 +3,7 @@
         <head-top signin-up='home'>
             <span slot='logo' class="head_logo"  @click="reload">党建云</span>
         </head-top> 
-        <section class="swiper_slides_section" v-if="swiperSlides.length">
-            <swiper :options="swiperOption" class="mySwiper">
-                <swiper-slide v-for="slide in swiperSlides" :key="slide.index" class="mySwiperSlider">
-                    <img :src="slide.imgUrl" class="swiperImg">
-                </swiper-slide>
-                <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-        </section> 
-        <section class="app_list_section">
-            <a :href="appItem.targetUrl" v-for="appItem in appList" :key="appItem.agentId" class="link_to_app">
-	            <figure>
-	                <img :src="appItem.appIcon">
-	                <figcaption>{{appItem.name}}</figcaption>
-	            </figure>
-	        </a>
-        </section>
+         <div id="map" class="map"></div>  
         <foot-guide selectedItem='home'></foot-guide>
     </div>
 </template>
@@ -27,56 +12,29 @@
 import {mapState, mapMutations} from 'vuex'
 import headTop from '../../components/header/head'
 import footGuide from 'src/components/footer/lfootGuide'
-import {getAppList, ddConfig, getDdUserID} from '../../service/getData'
+import {ddConfig, getDdUserID} from '../../service/getData'
 import '../../plugins/dingtalk.min.js'
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
+import {getLocation} from '../../service/map'
 export default {
     data(){
         return{
-            appList:[],
-            swiperOption: {
-                autoplay: {
-                    stopOnLastSlide: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination'
-                }
-            },
-            swiperSlides: [
-                {
-                    index: 0,
-                    imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523090336213&di=e7aa898e0fec45153a5d2c95a9941099&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D42952174%2C4038341886%26fm%3D214%26gp%3D0.jpg',
-                },
-                {
-                    index: 1,
-                    imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523090336213&di=e7aa898e0fec45153a5d2c95a9941099&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D42952174%2C4038341886%26fm%3D214%26gp%3D0.jpg',
-                },
-                                {
-                    index: 2,
-                    imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523090336213&di=e7aa898e0fec45153a5d2c95a9941099&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D42952174%2C4038341886%26fm%3D214%26gp%3D0.jpg',
-                },
-                {
-                    index: 3,
-                    imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523090336213&di=e7aa898e0fec45153a5d2c95a9941099&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D42952174%2C4038341886%26fm%3D214%26gp%3D0.jpg',
-                },
-                
-            ]
+            map: null,
         }
     },
 
 	mounted(){
+        this.initMap()
         //TODO: 获取 appList
-        getAppList().then(res => {
-            res.map(function(app){// TODO; corpId 要从缓存中拿
-                const corpid = 'ding31148f160c24897635c2f4657eb6378f';
-                app.targetUrl = 'dingtalk://dingtalkclient/action/switchtab?index=2&name=work&scene=1&corpid=' + corpid +'agentid=' + app.agentId;
-                return app;    
-            })
-            this.appList = res;
-            console.log(this.appList)
-          })
+        // getAppList().then(res => {
+        //     res.map(function(app){// TODO; corpId 要从缓存中拿
+        //         const corpid = 'ding31148f160c24897635c2f4657eb6378f';
+        //         app.targetUrl = 'dingtalk://dingtalkclient/action/switchtab?index=2&name=work&scene=1&corpid=' + corpid +'agentid=' + app.agentId;
+        //         return app;    
+        //     })
+        //     this.appList = res;
+        //     console.log(this.appList)
+        //   })
     //     setInterval(() => {
     //     console.log('simulate async data')
     //     if (this.swiperSlides.length < 10) {
@@ -89,8 +47,6 @@ export default {
 
     components:{
         headTop,
-        swiper,
-        swiperSlide,
         footGuide
     },
 
@@ -146,7 +102,23 @@ export default {
                     });
                 })
             })
-        }
+        },
+
+        async initMap(){
+            console.log('initMap')
+            const city = '六盘水市'
+            console.log(city)
+            //获取六盘水市的经纬度
+            const location = await getLocation(city)
+            this.map = new AMap.Map('map',{ //生成 map
+              zoom: 10,
+              center: location
+            });
+            const marker = new AMap.Marker({
+              position: location,//marker所在的位置
+              map: this.map//创建时直接赋予map属性
+            });
+        },
     }
 }
 
@@ -154,59 +126,12 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../style/mixin';
-    .head_logo{
-        left: 0.4rem;
-        font-weight: 400;
-        @include sc(0.7rem, #fff);
-        @include wh(2.3rem, 0.7rem);
-        @include ct;
-    }
-    .mySwiper{
-        width: 90%;
-        padding-top: 2.35rem;
-        border-top: 1px solid $bc;
-        background-color: #fff;
-        margin-bottom: 0.4rem;
-        .mySwiperSlider{
-            width: 100%;
-            height: 250px;
-            .swiperImg{
-                width: 100%;
-                height: 100%;
-            }
-        }
-        // .swiper-pagination {
-        //     height: 5%;
-        // }
-    } 
-    .app_list_section{
-        width: 100%;
-        margin-top:.6rem;
-        background:$fc;
-		display:flex;
-		flex-wrap: wrap;
-		.link_to_app{
-			width: 25%;
-			padding: 0.3rem 0rem;
-			@include fj(center);
-			figure{
-				img{
-					margin-bottom: 0.3rem;
-					@include wh(1.8rem, 1.8rem);
-				}
-				figcaption{
-					text-align: center;
-					@include sc(0.55rem, #666);
-				}
-			}
-		}
-	}
-    .room_section {
-         width: 100%;
-        margin-top:.6rem;
-        background:$fc;
-		display:flex;
-		flex-wrap: wrap;
+    .map{
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        margin-top: 2.2rem;
+        width: 15.5rem;
+        height: 30rem;
     }
     // .city_nav{
     //     padding-top: 2.35rem;
