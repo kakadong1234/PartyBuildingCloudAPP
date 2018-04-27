@@ -1,6 +1,7 @@
 import App from '../App'
 const lhome = r => require.ensure([], () => r(require('../page/home/lhome')), 'lhome')
 const study = r => require.ensure([], () => r(require('../page/study/study')), 'study')
+const studyDetail = r => require.ensure([], () => r(require('../page/study/studyDetail')), 'studyDetail')
 const exam = r => require.ensure([], () => r(require('../page/exam/exam')), 'exam')
 const lprofile = r => require.ensure([], () => r(require('../page/profile/lprofile')), 'lprofile')
 const tenementDetail = r => require.ensure([], () => r(require('../page/tenement/children/tenementDetail')), 'tenementDetail')
@@ -80,8 +81,14 @@ export default [{
 
         //学习中心页
         {
-            path: '/study/:geohash',
+            path: '/study',
             component: study
+        },
+
+        //租房详情
+        {
+            path: '/study/:studyID',
+            component: studyDetail
         },
 
         //考试中心页

@@ -140,7 +140,7 @@ export default {
 
 		goToDetailPage(id) {
 			console.log("goToBillPage " + id);
-        	this.$router.push('/tenement/' + id );
+        	this.$router.push('/study/' + id );
 		}
 	},
 	watch: {
