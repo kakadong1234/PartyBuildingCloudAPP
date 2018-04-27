@@ -1,10 +1,10 @@
 <template>
   	<div class="paddingTop search_page">
-        <head-top head-title="学习中心"></head-top>
+        <head-top head-title="考试中心"></head-top>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="正在学习" name="1">
+            <el-tab-pane label="正在考试" name="1">
                 <el-row>
-                    <el-col :span="8" v-for="item in studyingList" :key="item">
+                    <el-col :span="8" v-for="item in examingList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
                             <img src="~examples/assets/images/hamburger.png" class="image">
                             <div style="padding: 14px;">
@@ -17,9 +17,9 @@
                     </el-col>
                 </el-row>
             </el-tab-pane>
-            <el-tab-pane label="未学习" name="0">
+            <el-tab-pane label="未考试" name="0">
                 <el-row>
-                    <el-col :span="8" v-for="item in noStartStudyList" :key="item">
+                    <el-col :span="8" v-for="item in noStartExamList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
                             <img src="~examples/assets/images/hamburger.png" class="image">
                             <div style="padding: 14px;">
@@ -29,9 +29,9 @@
                     </el-col>
                 </el-row>
             </el-tab-pane>
-            <el-tab-pane label="已经学完" name="2">
+            <el-tab-pane label="已经考试" name="2">
                 <el-row>
-                    <el-col :span="8" v-for="item in studyedList" :key="item">
+                    <el-col :span="8" v-for="item in examedList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
                             <img src="~examples/assets/images/hamburger.png" class="image">
                             <div style="padding: 14px;">
@@ -55,15 +55,15 @@
 import headTop from '../../components/header/head'
 import footGuide from '../../components/footer/lfootGuide'
 import {getStore, setStore} from '../../config/mUtils'
-import {getStudyList} from '../../service/study'
+import {getExamList} from '../../service/exam'
 
 export default {
 	data(){
         return {
             activeName: '1',
-            studyingList: [],
-            noStartStudyList: [],
-            studyedList: [],
+            examingList: [],
+            noStartExamList: [],
+            examedList: [],
             offset: 0
         }
     },
@@ -71,7 +71,7 @@ export default {
        
     },
     mounted(){
-        this.getStudyListForStatus()
+        this.getExamListForStatus()
     },
     components:{
         headTop,
@@ -81,19 +81,19 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
             //是不是要维护activeName
-            this.getStudyListForStatus()
+            this.getExamListForStatus()
         },
-        async getStudyListForStatus(){
+        async getExamListForStatus(){
             const status = this.activeName
-            const list = await getStudyList(status, offset)
+            const list = await getExamList(status, offset)
             if(status === 0) {
-                this.noStartStudyList = list
+                this.noStartExamList = list
             }
             else if(status === 1){
-                this.studyingList = list
+                this.examingList = list
             }
             else {
-                this.studyedList= list
+                this.examedList= list
             }
         }
     }

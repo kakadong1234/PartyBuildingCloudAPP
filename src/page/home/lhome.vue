@@ -1,8 +1,6 @@
 <template>
     <div class='container'> 
-        <head-top signin-up='home'>
-            <span slot='logo' class="head_logo"  @click="reload">党建云</span>
-        </head-top> 
+        <head-top head-title="党旗飘飘"></head-top>
          <div id="map" class="map"></div>  
         <foot-guide selectedItem='home'></foot-guide>
     </div>
