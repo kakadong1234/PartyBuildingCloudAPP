@@ -6,10 +6,6 @@ import {routerMode} from './config/env'
 import './config/rem'
 import FastClick from 'fastclick'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en'
-Vue.use(ElementUI, { locale })
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 // require styles
 import 'swiper/dist/css/swiper.css'

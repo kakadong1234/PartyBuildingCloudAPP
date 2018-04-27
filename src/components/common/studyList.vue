@@ -1,24 +1,13 @@
 <template>
 	<div class="list_container">
-		<ul v-load-more="loaderMoreMethod" v-if="tenementListArr.length" type="1">
-			<div v-for="item in tenementListArr" tag='li' :key="item.ID" class="tenement_li" @click="goToDetailPage(item.ID)">
-				<section>
-					<img :src="item.imgURLList[0]" class="tenement_img">
+		<ul v-load-more="loaderMoreMethod" v-if="studyListArr.length" type="1">
+			<div v-for="index in getNumberList()" tag='li' :key="index" class="table_div">
+			<div v-for="item in getRowList(index)" tag='li' :key="item.ID" class="row_div">
+				<section class='card_section' @click="goToDetailPage(item.ID)">
+					<img :src="item.imgUrl" class="img">
+					<h4 class="title">{{item.title}}</h4>
 				</section>
-				<hgroup class="tenement_right">
-					<header class="tenement_detail_header">
-						<h4 class="tenement_title">{{item.title}}</h4>
-						<div class="tenement_detail_ul">
-							<span class="payStatus">{{item.lease.payStatus}}</span>
-						</div>
-					</header>
-					<section class="fee_address">
-						<span class="fee">租金: ¥ {{item.rentForMonth}}</span>
-					</section>
-					<section class="fee_address">
-						<span class="address">地址: {{item.address}}</span>
-					</section>
-				</hgroup>
+			</div>
 			</div>
 		</ul>
 		<ul v-else class="animation_opactiy">
@@ -42,7 +31,7 @@
 <script>
 
 import {mapState} from 'vuex'
-import {getTenementList} from 'src/service/getData'
+import {getStudyList} from '../../service/study'
 import {showBack, animate} from 'src/config/mUtils'
 import {loadMore} from './mixin'
 import loading from './loading'
@@ -50,8 +39,8 @@ import loading from './loading'
 export default {
 	data(){
 		return {
-			offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
-			tenementListArr:[], // 租房列表数据
+			offset: 0, // 批次加载店铺列表，每次加载10个 limit = 10
+			studyListArr:[], // 租房列表数据
 			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
 			showBackStatus: false, //显示返回顶部按钮
 			showLoading: true, //显示加载动画
@@ -76,11 +65,10 @@ export default {
 	methods: {
 		async initData(){
 			//获取数据
-			// let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			let res = await getTenementList('123' ,this.offset);
-			this.tenementListArr = [...res];
+			let res = await getStudyList('123', this.offset);
+			this.studyListArr = [...res];
 			console.log(res.length)
-			if (res.length < 20) {
+			if (res.length < 10) {
 				this.touchend = true;
 			}
 			this.hideLoading();
@@ -106,21 +94,40 @@ export default {
 			this.showLoading = true;
 			this.preventRepeatReuqest = true;
 
-			//数据的定位加20位
+			//数据的定位加10位
 			console.log('old offset:' + this.offset)
-			this.offset = this.offset + 20;
+			this.offset = this.offset + 10;
 			console.log('new offset:' + this.offset)
-			// let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			let res = await getTenementList('123' ,this.offset);
+			let res = await getStudyList('123' ,this.offset);
 			console.log(res)
 			this.hideLoading();
-			this.tenementListArr = [...this.tenementListArr, ...res];
-			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
-			if (res.length < 20) {
+			this.studyListArr = [...this.studyListArr, ...res];
+			//当获取数据小于10，说明没有更多数据，不需要再次请求数据
+			if (res.length < 10) {
 				this.touchend = true;
 				return
 			}
 			this.preventRepeatReuqest = false;
+		},
+
+		getNumberList(){
+			const numberList = [];
+			for(let i=0;i<this.studyListArr.length / 2;i++){
+				numberList.push(i)
+			}
+			console.log(numberList)
+			return numberList
+		},
+		getRowList(index){
+			console.log(index)
+			const rowList = []
+			rowList.push(this.studyListArr[index*2])
+			const currentIndex = index * 2 + 1;
+			if(currentIndex < this.studyListArr.length) {
+				rowList.push(this.studyListArr[index*2+1])
+			}
+			console.log(rowList)
+			return rowList
 		},
 		//返回顶部
 		backTop(){
@@ -144,61 +151,35 @@ export default {
 <style lang="scss" scoped>
 	@import 'src/style/mixin';
 	.list_container{
-		background-color: #fff;
+		background-color: white;
 		margin-bottom: 2rem;
 	}
-	.tenement_li{
-		display: flex;
-		border-bottom: 0.025rem solid #f1f1f1;
-		padding: 0.7rem 0.4rem;
-	}
-	.tenement_img{
-		@include wh(2.7rem, 2.7rem);
-		display: block;
-		margin-right: 0.4rem;
+	.table_div{
+		display: flex;	
+		padding: 0.4rem;
+		.row_div {
+			display:flex;
+        	// border-bottom:1px solid #f1f1f1;
+        	justify-content:space-between;
+			.card_section{
+				border: 0.075rem solid #f1f1f1;
+				@include wh(7.6rem, 7rem);
+				.img{
+					margin-left: 0.2rem;
+					@include wh(7rem, 5rem);
+				}
+				.title{
+					margin-left: 0.2rem;
+					@include wh(7.4rem, 0.5rem);
+					@include sc(0.4rem, #666);
+				}
+			}
+		}
 	}
 	.list_back_li{
 		height: 4.85rem;
 		.list_back_svg{
 			@include wh(100%, 100%)
-		}
-	}
-	.tenement_right{
-		flex: auto;
-		.tenement_detail_header{
-			@include fj;
-			align-items: center;
-			.tenement_title{
-				width: 8.5rem;
-				color: #333;
-				padding-top: .01rem;
-				@include font(0.65rem, 0.65rem, 'PingFangSC-Regular');
-				font-weight: 700;
-			}
-			.tenement_detail_ul{
-				
-				transform: scale(.8);
-				margin-right: -0.3rem;
-				.payStatus{
-					@include sc(0.5rem, #999);
-					border: 0.025rem solid #f1f1f1;
-					padding: 0 0.04rem;
-					border-radius: 0.08rem;
-					margin-left: 0.05rem;
-				}
-			}
-		}
-		.fee_address{
-			margin-top: 0.52rem;
-			@include fj;
-			.fee{
-				// transform: scale(.9);
-				@include sc(0.3rem, #666);
-			}
-			.address{
-				// transform: scale(.9);
-				@include sc(0.3rem, #666);
-			}
 		}
 	}
 	.loader_more{

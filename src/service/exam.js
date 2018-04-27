@@ -2,7 +2,7 @@ const ALL_LIST =[
   {
     ID: 1,
     title: '试卷01',
-    imgUrl: '',
+    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
     status: 0, //未开始考试
     leaveTime: 30 * 60, //考试剩余时间
     score: 0, //考试分数, 未考和正在考时为0
@@ -123,7 +123,7 @@ const ALL_LIST =[
   {
     ID: 2,
     title: '试卷05',
-    imgUrl: '',
+    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
     status: 1, //正在考试
     leaveTime: 100, //考试剩余时间(秒)
     score: 0, //考试分数, 未考和正在考时为0
@@ -244,7 +244,7 @@ const ALL_LIST =[
   {
     ID: 3,
     title: '试卷03',
-    imgUrl: '',
+    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
     status: 3, //完成考试
     leaveTime: 20, //考试剩余时间(秒)
     score: 90, //考试分数, 未考和正在考时为0
@@ -365,7 +365,7 @@ const ALL_LIST =[
   {
     ID: 4,
     title: '试卷04',
-    imgUrl: '',
+    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
     status: 0,
     leaveTime: 30 * 60, //考试剩余时间
     score: 0, //考试分数, 未考和正在考时为0

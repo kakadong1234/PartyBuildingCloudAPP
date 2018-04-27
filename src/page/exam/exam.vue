@@ -6,7 +6,7 @@
                 <el-row>
                     <el-col :span="8" v-for="item in examingList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
-                            <img src="~examples/assets/images/hamburger.png" class="image">
+                            <img :src="item.imgUrl" class="image">
                             <div style="padding: 14px;">
                                 <span>item.title</span>
                                 <div class="bottom clearfix">
@@ -21,7 +21,7 @@
                 <el-row>
                     <el-col :span="8" v-for="item in noStartExamList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
-                            <img src="~examples/assets/images/hamburger.png" class="image">
+                            <img :src="item.imgUrl" class="image">
                             <div style="padding: 14px;">
                                 <span>item.title</span>
                             </div>
@@ -33,7 +33,7 @@
                 <el-row>
                     <el-col :span="8" v-for="item in examedList" :key="item">
                         <el-card :body-style="{ padding: '0px' }">
-                            <img src="~examples/assets/images/hamburger.png" class="image">
+                            <img :src="item.imgUrl" class="image">
                             <div style="padding: 14px;">
                                 <span>item.title</span>
                                 <!-- <div class="bottom clearfix">
@@ -47,7 +47,7 @@
 
             </el-tab-pane>
         </el-tabs>
-        <foot-guide selectedItem='search'></foot-guide>
+        <foot-guide selectedItem='tenement'></foot-guide>
     </div>
 </template>
 
