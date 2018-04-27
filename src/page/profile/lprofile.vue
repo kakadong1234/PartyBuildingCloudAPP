@@ -54,7 +54,7 @@
                         </svg>
                     </aside>
                     <div class="myorder-div">
-                        <span>我的房源</span>
+                        <span>学习历史</span>
                         <span class="myorder-divsvg">
                             <svg fill="#bbb">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>

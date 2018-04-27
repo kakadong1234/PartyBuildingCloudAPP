@@ -1,20 +1,20 @@
 <template>
     <section id='foot_guide'>
         <section @click = "gotoAddress({path: '/lhome', query: {geohash}})" class="guide_item">
-            <img v-if="selectedItem!=='home'" src="../../images/homePage.png" class="icon_style">  
-            <img v-else src="../../images/homePageSelected.png" class="icon_style"> 
+            <img v-if="selectedItem!=='home'" src="../../images/party.png" class="icon_style">  
+            <img v-else src="../../images/partySelected.png" class="icon_style"> 
             <span v-if="selectedItem!=='home'" :style="{color: '#707070'}">党旗飘飘</span>
             <span v-else :style="{color: '#1296db'}">党旗飘飘</span>
         </section>
         <section @click = "gotoAddress({path: '/study'})" class="guide_item">
-            <img v-if="selectedItem!=='search'" src="../../images/search.png" class="icon_style">  
-            <img v-else src="../../images/searchSelected.png" class="icon_style"> 
+            <img v-if="selectedItem!=='search'" src="../../images/study.png" class="icon_style">  
+            <img v-else src="../../images/studySelected.png" class="icon_style"> 
             <span v-if="selectedItem!=='search'" :style="{color: '#707070'}">学习中心</span>
             <span v-else :style="{color: '#1296db'}">学习中心</span>
         </section>
         <section @click = "gotoAddress({path: '/exam'})" class="guide_item">
-            <img v-if="selectedItem!=='tenement'" src="../../images/tenement.png" class="icon_style">  
-            <img v-else src="../../images/tenementSelected.png" class="icon_style"> 
+            <img v-if="selectedItem!=='tenement'" src="../../images/exam.png" class="icon_style">  
+            <img v-else src="../../images/examSelected.png" class="icon_style"> 
             <span v-if="selectedItem!=='tenement'" :style="{color: '#707070'}">考试中心</span>
             <span v-else :style="{color: '#1296db'}">考试中心</span>
         </section>
