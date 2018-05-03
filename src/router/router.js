@@ -5,6 +5,7 @@ const studyDetail = r => require.ensure([], () => r(require('../page/study/study
 const exam = r => require.ensure([], () => r(require('../page/exam/exam')), 'exam')
 const lprofile = r => require.ensure([], () => r(require('../page/profile/lprofile')), 'lprofile')
 const tenementDetail = r => require.ensure([], () => r(require('../page/tenement/children/tenementDetail')), 'tenementDetail')
+const branchDetail = r => require.ensure([], () => r(require('../page/home/branchDetail')), 'branchDetail')
 
 const billTotal = r => require.ensure([], () => r(require('../page/bill/billTotal')), 'billTotal')
 const bill = r => require.ensure([], () => r(require('../page/bill/bill')), 'bill')
@@ -77,6 +78,12 @@ export default [{
         {
             path: '/lhome',
             component: lhome
+        },
+
+        //branchDes
+        {
+            path: '/branch/:branchID',
+            component: branchDetail
         },
 
         //学习中心页

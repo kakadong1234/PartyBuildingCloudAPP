@@ -5,7 +5,6 @@ import {
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
-
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
 		Object.keys(data).forEach(key => {
@@ -20,7 +19,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 
 	if (window.fetch && method == 'fetch') {
 		let requestConfig = {
-			credentials: 'include',
+			// credentials: 'include',
 			method: type,
 			headers: {
 				'Accept': 'application/json',
@@ -39,6 +38,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		try {
 			const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
+			console.log(responseJson)
 			return responseJson
 		} catch (error) {
 			throw new Error(error)

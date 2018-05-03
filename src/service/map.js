@@ -6,7 +6,7 @@ export const getLocation = (address) => {
               if (status === 'complete' && result.info === 'OK') {
                 const location = result.geocodes[0].location
                 console.log(location)
-                return reslove([location.lng, location.lat])
+                return reslove({longitude:location.lng, latitude: location.lat})
               }
               else {
                  return reject(new Error('获取经纬度失败, 错误为' + result.info))
