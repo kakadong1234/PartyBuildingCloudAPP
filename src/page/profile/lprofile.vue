@@ -1,6 +1,6 @@
 <template>
     <div class="profile_page">
-        <head-top :head-title="profiletitle" nav='true'></head-top>
+        <head-top head-title="个人中心" nav='true'></head-top>
         <section>
             <section class="profile-number">
                 <router-link :to="userInfo&&userInfo.user_id? '/profile/info' : '/login'" class="profile-link">

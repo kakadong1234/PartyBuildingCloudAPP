@@ -5,7 +5,11 @@ const studyDetail = r => require.ensure([], () => r(require('../page/study/study
 const exam = r => require.ensure([], () => r(require('../page/exam/exam')), 'exam')
 const lprofile = r => require.ensure([], () => r(require('../page/profile/lprofile')), 'lprofile')
 const tenementDetail = r => require.ensure([], () => r(require('../page/tenement/children/tenementDetail')), 'tenementDetail')
+const course = r => require.ensure([], () => r(require('../page/course/index')), 'course')
+const cadre = r => require.ensure([], () => r(require('../page/cadre/index')), 'cadre')
 const branchDetail = r => require.ensure([], () => r(require('../page/home/branchDetail')), 'branchDetail')
+const talentCenter = r => require.ensure([], () => r(require('../page/talentCenter/index')), 'talentCenter')
+const eHome = r => require.ensure([], () => r(require('../page/eHome/index')), 'eHome')
 
 const billTotal = r => require.ensure([], () => r(require('../page/bill/billTotal')), 'billTotal')
 const bill = r => require.ensure([], () => r(require('../page/bill/bill')), 'bill')
@@ -71,7 +75,7 @@ export default [{
         //地址为空时跳转home页面
         {
             path: '',
-            redirect: '/lhome'
+            redirect: '/study'
         },
 
         //首页 banner 条+ 应用列表
@@ -102,6 +106,26 @@ export default [{
         {
             path: '/exam',
             component: exam
+        },  
+        //干部管理
+        {
+            path: '/cadre',
+            component: cadre
+        },  
+        //人才驿站
+        {
+            path: '/talentCenter',
+            component: talentCenter
+        }, 
+        //党员 E家
+        {
+            path: '/eHome',
+            component: eHome
+        }, 
+        //网上讲习所
+        {
+            path: '/course',
+            component: course
         },  
         //租房详情
         {

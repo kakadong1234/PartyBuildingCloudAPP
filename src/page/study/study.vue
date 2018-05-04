@@ -1,6 +1,6 @@
 <template>
   	<div class="paddingTop search_page">
-        <head-top head-title="学习中心" nav='true'></head-top>
+        <head-top head-title="云学习中心" nav='true'></head-top>
         <div class="list_container">
 	    	<study-list></study-list>
     	</div>

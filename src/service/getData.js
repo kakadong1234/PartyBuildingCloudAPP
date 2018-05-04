@@ -194,120 +194,47 @@ export const getAppList = () => {
 	return new Promise(function(reslove, reject){
 		const appList = [
 			{
-            "appIcon": "http://static.dingtalk.com/media/lALOcrvqOszIzMg_200_200.png",
-            "agentId": 50821899,
-            "appDesc": "你的努力老板看得见",
-            "name": "签到",
-            "homepageLink": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://attendance.dingtalk.com/attendance/web/web/home/index"
-            },
-            {
-            "appIcon": "http://static.dingtalk.com/media/lALOcsYpu8zIzMg_200_200.png",
-            "agentId": 50821900,
-            "pcHomepageLink": "https://attend.dingtalk.com/portal/index_pc.html?corpId=ding31148f160c24897635c2f4657eb6378f",
-            "appDesc": "考勤，上下班打卡",
-            "name": "考勤打卡",
-            "homepageLink": "https://attend.dingtalk.com/attend/index.html?corpId=ding31148f160c24897635c2f4657eb6378f&showmenu=false&dd_share=false&dd_progress=false",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://attend.dingtalk.com/admin/index"
-            },
-            {
-            "appIcon": "http://static.dingtalk.com/media/lALOcsZGkszIzMg_200_200.png",
-            "agentId": 50821904,
-            "pcHomepageLink": "",
-            "appDesc": "工作汇报，日报，周报",
-            "name": "日志",
-            "homepageLink": "https://landray.dingtalkapps.com/alid/app/report/home.html?showmenu=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://landray.dingtalkapps.com/alid/reportpc/getTotalDetail"
-            },
-            {
-            "appIcon": "http://static.dingtalk.com/media/lALOcsZHFszIzMg_200_200.png",
-            "agentId": 50821906,
-            "pcHomepageLink": "https://app.dingtalk.com/index.html?corpId=ding31148f160c24897635c2f4657eb6378f",
-            "appDesc": "企业重要信息",
-            "name": "公告",
-            "homepageLink": "https://app.dingtalk.com/blackboard/noticeList.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://app.dingtalk.com/blackboard/api/auth"
-            },
-            {
-            "appIcon": "http://static.dingtalk.com/media/lALOcsZGQszIzMg_200_200.png",
-            "agentId": 50821907,
-            "pcHomepageLink": "https://aflow.dingtalk.com/dingtalk/pc/query/pchomepage.htm?corpid=ding31148f160c24897635c2f4657eb6378f",
-            "appDesc": "请假、报销，各类审批",
-            "name": "审批",
-            "homepageLink": "https://aflow.dingtalk.com/dingtalk/mobile/homepage.htm?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://aflow.dingtalk.com/dingtalk/web/code"
-            },
-            {
-            "appIcon": "http://static.dingtalk.com/media/lALOcsah9MzIzMg_200_200.png",
-            "agentId": 50821913,
-            "appDesc": "企业邮箱",
-            "name": "钉邮",
-            "homepageLink": "http://mail.dingtalk.com/auth/login",
-            "appStatus": 1,
-            "isSelf": false,
-            "ompLink": "https://oa.dingtalk.com/#/microApp/orgEmail"
-            },
-            {
-                "appIcon": "http://static.dingtalk.com/media/lALOcsahiMzIzMg_200_200.png",
-                "agentId": 50821914,
-                "appDesc": "企业云盘，资料共享",
-                "name": "钉盘",
-                "homepageLink": "https://space.dingtalk.com/auth/login",
-                "appStatus": 1,
-                "isSelf": false,
-                "ompLink": "https://space.dingtalk.com/admin.html"
-            },
-            {
-                "appIcon": "http://static.dingtalk.com/media/lALOcsxZiszIzMg_200_200.png",
-                "agentId": 50821915,
-                "pcHomepageLink": "https://clouddata.dingtalkapps.com/alid/static/guide.html?corpId=ding31148f160c24897635c2f4657eb6378f",
-                "appDesc": "智能报表",
-                "name": "智能报表",
-                "homepageLink": "https://clouddata.dingtalkapps.com/alid/mobile/index.html?corpId=ding31148f160c24897635c2f4657eb6378f&dd_progress=false",
-                "appStatus": 1,
-                "isSelf": false,
-                "ompLink": "https://clouddata.dingtalkapps.com/routes/data/ListView/"
-            },
-            {
-                "appIcon": "http://static.dingtalk.com/media/lALOcsajBszIzMg_200_200.png",
-                "agentId": 50821920,
-                "appDesc": "高质量电话会议",
-                "name": "电话会议",
-                "homepageLink": "http://businessConference.dingtalk.com/auth/login",
-                "appStatus": 1,
-                "isSelf": false
-            },
-            {
-                "appIcon": "http://static.dingtalk.com/media/lALOcsaifMzIzMg_200_200.png",
-                "agentId": 50821921,
-                "pcHomepageLink": "https://h5.dingtalk.com/voip/index.html",
-                "appDesc": "视频会议",
-                "name": "视频会议",
-                "homepageLink": "",
-                "appStatus": 1,
-                "isSelf": false
-            },
-            {
-                "appIcon": "http://static.dingtalk.com/media/lALPBY0V4x4vWbnNBBTNCLw_2236_1044.png",
-                "agentId": 169284840,
-                "pcHomepageLink": "http://localhost:8000",
-                "appDesc": "包租婆包租婆",
-                "name": "包租婆",
-                "homepageLink": "http://192.168.0.106:8000/home",
-                "appStatus": 1,
-                "isSelf": true,
-                "ompLink": "http://vuedemo.kakadong.top"
-			}
+				"id": 1,
+            	"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/task.png",
+            	"appDesc": "你的努力老板看得见",
+            	"name": "任务调度",
+            	"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
+			{
+				"id": 2,
+				"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/message.png",
+				"appDesc": "你的努力老板看得见",
+				"name": "信息上报",
+				"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
+			{
+				"id": 3,
+				"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/xiezuo.png",
+				"appDesc": "你的努力老板看得见",
+				"name": "协作",
+				"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
+			{
+				"id": 4,
+				"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/request.png",
+				"appDesc": "你的努力老板看得见",
+				"name": "贫困户诉求",
+				"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
+			{
+				"id": 5,
+				"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/kaoqing.png",
+				"appDesc": "你的努力老板看得见",
+				"name": "考勤打卡",
+				"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
+			{
+				"id": 6,
+				"appIcon": "http://7xrsfo.com1.z0.glb.clouddn.com/other.png",
+				"appDesc": "你的努力老板看得见",
+				"name": "其它",
+				"link": "https://attendance.dingtalk.com/attendance/mobile/mapAttendance.html?showmenu=false&dd_progress=false&dd_share=false&corpid=ding31148f160c24897635c2f4657eb6378f",
+			},
 		]
 		reslove(appList)
 	})

@@ -40,12 +40,12 @@
             return{
                 isShowNav: false,
                 navList: [
-                    {title:'网上讲习所', url: '/study'},
+                    {title:'网上讲习所', url: '/course'},
                     {title:'党旗飘飘', url: '/lhome'}, 
-                    {title:'党员E家', url: ''}, 
+                    {title:'党员E家', url: '/eHome'}, 
                     {title:'云学习中心', url: '/study'}, 
-                    {title:'驻村轮站干部管理', url: ''}, 
-                    {title:'人才驿站', url: ''}, 
+                    {title:'驻村轮站干部管理', url: '/cadre'}, 
+                    {title:'人才驿站', url: '/talentCenter'}, 
                     {title:'个人信息', url: '/lprofile'}
                 ]
             }
