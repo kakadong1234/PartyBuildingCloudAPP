@@ -66,5 +66,4 @@ $fc:#fff;
 @mixin fj($type: space-between){
 	display: flex;
 	justify-content: $type;
-
 }

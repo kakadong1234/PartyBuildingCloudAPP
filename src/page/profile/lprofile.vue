@@ -1,6 +1,6 @@
 <template>
     <div class="profile_page">
-        <head-top go-back='true' :head-title="profiletitle"></head-top>
+        <head-top :head-title="profiletitle" nav='true'></head-top>
         <section>
             <section class="profile-number">
                 <router-link :to="userInfo&&userInfo.user_id? '/profile/info' : '/login'" class="profile-link">
@@ -131,7 +131,7 @@
                 </router-link> -->
             </section>
         </section>
-        <foot-guide selectedItem='profile'></foot-guide>
+        <!-- <foot-guide selectedItem='profile'></foot-guide> -->
         <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>

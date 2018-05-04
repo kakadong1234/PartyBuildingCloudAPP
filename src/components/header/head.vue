@@ -13,6 +13,15 @@
             </svg>
             <span class="login_span" v-else>登录|注册</span>
         </router-link>
+        <div v-if="nav" class="nav_div" @click.stop="showOrhiddenNav">
+            <span v-if="!isShowNav" class="nav_span" >导航</span>
+            <span v-else class="nav_span" >收起</span>
+        </div>
+        <div v-if="isShowNav && navList.length" class="nav_list_div" >
+            <div class="nav_item" v-for="item in navList" :key="item.title" @click.stop="goToPage(item.url)">
+                <div class="item_span">{{item.title}}</div>
+            </div>
+            </div>
         <section class="title_head ellipsis" v-if="headTitle">
             <span class="title_text">{{headTitle}}</span>
         </section>
@@ -29,7 +38,16 @@
     export default {
     	data(){
             return{
-
+                isShowNav: false,
+                navList: [
+                    {title:'网上讲习所', url: '/study'},
+                    {title:'党旗飘飘', url: '/lhome'}, 
+                    {title:'党员E家', url: ''}, 
+                    {title:'云学习中心', url: '/study'}, 
+                    {title:'驻村轮站干部管理', url: ''}, 
+                    {title:'人才驿站', url: ''}, 
+                    {title:'个人信息', url: '/lprofile'}
+                ]
             }
         },
         mounted(){
@@ -37,7 +55,7 @@
             this.getUserInfo();
 
         },
-        props: ['signinUp', 'headTitle', 'goBack'],
+        props: ['signinUp', 'headTitle', 'goBack', 'nav'],
         computed: {
             ...mapState([
                 'userInfo'
@@ -47,6 +65,26 @@
             ...mapActions([
                 'getUserInfo'
             ]),
+
+            showOrhiddenNav(){
+                this.isShowNav = !this.isShowNav
+            },
+
+            getVueArr(stringArr, key){
+                const vueArr = [];
+                for(let i=0; i<vueArr.length; i++){
+                    const vueItem = {}
+                    vueItem.index = i
+                    vueItem[key] = vueArr[i]
+                    vueArr.push(vueItem)
+                }
+                return vueArr
+            },
+
+            goToPage(url){
+                console.log(url)
+                this.$router.push(url);
+            }
         },
 
     }
@@ -57,7 +95,7 @@
     @import '../../style/mixin';
 
     #head_top{
-        background-color: $blue;
+        background-color: #f8f8f8;
         position: fixed;
         z-index: 100;
         left: 0;
@@ -75,20 +113,44 @@
         @include sc(0.65rem, #fff);
         @include ct;
         .login_span{
-            color: #fff;
+            color: black;
         }
         .user_avatar{
-            fill: #fff;
+            fill: black;
             @include wh(.8rem, .8rem);
         }
     }
+    .nav_div{
+        right: 0.55rem;
+        @include sc(0.65rem, #fff);
+        @include ct;
+        .nav_span{
+            color: black;
+        } 
+    }
+    .nav_list_div{ 
+            margin-top: 1.95rem;
+            margin-left: 7rem;
+            background: white;
+            width: 9rem;
+            .nav_item {
+                background: #616161;
+                margin-top: 0.05rem;
+                height: 2.5rem;
+                .item_span{
+                    @include sc(0.8rem, #fff);
+                    line-height: 2.5rem; /*设置line-height与父级元素的height相等*/
+                    text-align: center; /*设置文本水平居中*/
+                }
+            }
+        }
     .title_head{
         @include center;
         width: 50%;
-        color: #fff;
+        color: black;
         text-align: center;
         .title_text{
-            @include sc(0.8rem, #fff);
+            @include sc(0.8rem, black);
             text-align: center;
             font-weight: bold;
         }

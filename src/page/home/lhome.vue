@@ -1,8 +1,8 @@
 <template>
     <div class='container'> 
-        <head-top head-title="党旗飘飘"></head-top>
+        <head-top head-title="党旗飘飘" nav='true'></head-top>
          <div id="map" class="map"></div>  
-        <foot-guide selectedItem='home'></foot-guide>
+        <!-- <foot-guide selectedItem='home'></foot-guide> -->
     </div>
 </template>
 
