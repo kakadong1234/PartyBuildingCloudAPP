@@ -1,13 +1,15 @@
 import App from '../App'
-const lhome = r => require.ensure([], () => r(require('../page/home/lhome')), 'lhome')
+const partyFlag = r => require.ensure([], () => r(require('../page/partyFlag/index')), 'partyFlag')
 const study = r => require.ensure([], () => r(require('../page/study/study')), 'study')
 const studyDetail = r => require.ensure([], () => r(require('../page/study/studyDetail')), 'studyDetail')
 const exam = r => require.ensure([], () => r(require('../page/exam/exam')), 'exam')
 const lprofile = r => require.ensure([], () => r(require('../page/profile/lprofile')), 'lprofile')
 const tenementDetail = r => require.ensure([], () => r(require('../page/tenement/children/tenementDetail')), 'tenementDetail')
-const course = r => require.ensure([], () => r(require('../page/course/index')), 'course')
+const column = r => require.ensure([], () => r(require('../page/column/index')), 'column')
+const columnDetail = r => require.ensure([], () => r(require('../page/column/columnDetail')), 'columnDetail')
+
 const cadre = r => require.ensure([], () => r(require('../page/cadre/index')), 'cadre')
-const branchDetail = r => require.ensure([], () => r(require('../page/home/branchDetail')), 'branchDetail')
+const branchDetail = r => require.ensure([], () => r(require('../page/partyFlag/branchDetail')), 'branchDetail')
 const talentCenter = r => require.ensure([], () => r(require('../page/talentCenter/index')), 'talentCenter')
 const eHome = r => require.ensure([], () => r(require('../page/eHome/index')), 'eHome')
 
@@ -72,18 +74,23 @@ export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
     children: [ //二级路由。对应App.vue
-        //地址为空时跳转home页面
+        //地址为空时跳转网上讲习所页面
         {
             path: '',
-            redirect: '/study'
+            redirect: '/column'
         },
 
-        //首页 banner 条+ 应用列表
+        // //首页 banner 条+ 应用列表
+        // {
+        //     path: '/lhome',
+        //     component: lhome
+        // },
+
+        //党旗飘飘页面
         {
-            path: '/lhome',
-            component: lhome
+            path: '/partyFlag',
+            component: partyFlag
         },
-
         //branchDes
         {
             path: '/branch/:branchID',
@@ -124,9 +131,15 @@ export default [{
         }, 
         //网上讲习所
         {
-            path: '/course',
-            component: course
+            path: '/column',
+            component: column
         },  
+
+        {
+            path: '/column/:id',
+            component: columnDetail
+        },  
+        
         //租房详情
         {
             path: '/tenement/:tenementID',
