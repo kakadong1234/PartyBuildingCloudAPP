@@ -2,6 +2,8 @@
     <div class='container'> 
         <head-top head-title="党旗飘飘" nav='true'></head-top>
          <div id="map" class="map"></div>  
+         <abstract-of-good-news-list limit=2> </abstract-of-good-news-list> 
+         <abstract-of-news-list limit=2> </abstract-of-news-list>
          <div class='ranking_list_div'>
             <div class="ranking_txt_div"> 乡镇排名 </div>
             <e-ranking-list> </e-ranking-list>
@@ -15,6 +17,8 @@ import {mapState, mapMutations} from 'vuex'
 import headTop from '../../components/header/head'
 import footGuide from 'src/components/footer/lfootGuide'
 import eRankingList from 'src/components/common/eRankingList'
+import abstractOfGoodNewsList from 'src/components/common/abstractOfGoodNewsList'
+import abstractOfNewsList from 'src/components/common/abstractOfNewsList'
 import {ddConfig, getDdUserID} from '../../service/getData'
 import '../../plugins/dingtalk.min.js'
 
@@ -76,6 +80,8 @@ export default {
     components:{
         headTop,
         footGuide,
+        abstractOfGoodNewsList,
+        abstractOfNewsList,
         eRankingList
     },
 
@@ -263,6 +269,12 @@ export default {
         margin-top: 2.2rem;
         width: 15.5rem;
         height: 12rem;
+    }
+    .abstract-of-good-news-list{
+        margin-top: 0.6rem;
+    } 
+    .abstract-of-news-list{
+        margin-top: 0.6rem;
     }
     .ranking_list_div{
         margin-top: .6rem;
