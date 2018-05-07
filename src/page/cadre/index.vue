@@ -17,8 +17,7 @@
         </section>
         <div class='ranking_list_div'>
             <div class="ranking_txt_div"> 排行榜 </div>
-            <!-- <ranking-list> </ranking-list> -->
-            <tenement-list></tenement-list>
+            <p-ranking-list> </p-ranking-list>
         </div>
     </div>
 </template>
@@ -30,7 +29,7 @@ import {getAppList, ddConfig, getDdUserID} from '../../service/getData'
 import '../../plugins/dingtalk.min.js'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import tenementList from 'src/components/common/tenementList'
+import pRankingList from 'src/components/common/pRankingList'
 
 export default {
     data(){
@@ -84,7 +83,7 @@ export default {
         headTop,
         swiper,
         swiperSlide,
-        tenementList        
+        pRankingList        
     },
 
     computed:{

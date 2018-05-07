@@ -4,7 +4,6 @@
         <div class="list_container">
 	    	<study-list></study-list>
     	</div>
-        <!-- <foot-guide selectedItem='search'></foot-guide> -->
     </div>
 </template>
 

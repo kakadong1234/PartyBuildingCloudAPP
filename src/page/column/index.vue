@@ -15,10 +15,7 @@
 	            <div class="column_name">{{item.name}}</div>
 	        </div>
         </section>
-        <div class='ranking_list_div'>
-            <div class="ranking_txt_div"> 排行榜 </div>
-            <p-ranking-list> </p-ranking-list>
-        </div>
+        <abstract-of-study-list class="xi_column_study_list" limit=4 :column="xi_column"></abstract-of-study-list>
     </div>
 </template>
 
@@ -29,12 +26,13 @@ import {getColumnList} from '../../service/column'
 import '../../plugins/dingtalk.min.js'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import pRankingList from 'src/components/common/pRankingList'
+import abstractOfStudyList from 'src/components/common/abstractOfStudyList'
 
 export default {
     data(){
         return{
             columnList:[],
+            xi_column:{},
             swiperOption: {
                 autoplay: {
                     stopOnLastSlide: false,
@@ -67,11 +65,18 @@ export default {
 
 	mounted(){
         getColumnList().then(res => {
-            this.columnList = res.map(function(column){
+            const data = res.map(function(column){
                 console.log(column)
                 column.link = '/column/' + column.id + '?columnName=' + column.name
                 return column
             });
+            this.xi_column = data.find(function(column){
+                return column.name === "社会主义新时代"
+            })
+            this.columnList = data.filter(function(column){
+                return column.name !== "社会主义新时代"
+            })
+            console.log(this.xi_column)
             console.log(this.columnList)
           })
         //开始钉钉相关设置
@@ -82,7 +87,7 @@ export default {
         headTop,
         swiper,
         swiperSlide,
-        pRankingList        
+        abstractOfStudyList      
     },
 
     computed:{
@@ -184,15 +189,9 @@ export default {
 			}
 		}
 	}
-    .ranking_list_div{
+    .xi_column_study_list{
         margin-top: .6rem;
-        .ranking_txt_div {
-            background: #888888;
-            text-align: center;
-            height: 2rem;
-            line-height: 2rem;
-			@include sc(0.65rem, #fbfbfb);
-        }
+        margin-bottom: 0.6rem;
     }
 
 </style>

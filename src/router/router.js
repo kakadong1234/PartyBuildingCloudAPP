@@ -103,7 +103,7 @@ export default [{
             component: study
         },
 
-        //租房详情
+        //课程详情
         {
             path: '/study/:studyID',
             component: studyDetail

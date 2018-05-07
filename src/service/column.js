@@ -7,7 +7,7 @@ export const getColumnList = () => {
 	return new Promise(function(reslove, reject){
 		let list = [
 			{
-				"id": 1,
+				"id": 11,
             	"imgUrl": "http://7xrsfo.com1.z0.glb.clouddn.com/dang.png",
             	"name": "党建",
                 "weight": 1,
@@ -41,7 +41,13 @@ export const getColumnList = () => {
             	"imgUrl": "http://7xrsfo.com1.z0.glb.clouddn.com/other_black.png",
             	"name": "其它",
                 "weight": 6,
-            }
+			},
+			{
+				"id": 1,
+				"imgUrl": "http://7xrsfo.com1.z0.glb.clouddn.com/other_black.png",
+				"name": "社会主义新时代",
+				"weight": 100,
+			}
 		]
 		list = list.sort(function(a, b) {
 			return a.weight - b.weight 	
