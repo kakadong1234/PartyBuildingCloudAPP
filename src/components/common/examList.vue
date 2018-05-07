@@ -1,20 +1,20 @@
 <template>
 	<div class="list_container">
-		<ul v-load-more="loaderMoreMethod" v-if="studyListArr.length" type="1">
-			<div v-for="index in getNumberList()" tag='li' :key="index" class="table_div">
-			<div v-for="item in getRowList(index)" tag='li' :key="item.ID" class="row_div">
-				<section class='card_section' @click="goToDetailPage(item.ID)">
-					<img :src="item.imgUrl" class="img">
-					<h4 class="title">{{item.title}}</h4>
-					<div class="rating_person_div"> 
-						<rating-star :rating="item.rating" class="rating"></rating-star>
-						<img src="../../images/person.png" class="person_img">
-						<div class="person_number_div"> {{item.personNumber}}</div>
-					</div>
-				</section>
+		<ul v-load-more="loaderMoreMethod" v-if="listArr.length" type="1">
+			<div v-for="item in listArr" :key="item.id" class="item_div">
+				<img :src="item.imgUrl" class="img">
+				<div class="title_status_leavetime_score_div"> 
+					<div class="title">{{item.title}}</div>
+					<div class="status" v-if="item.status === 0">未开始考试</div>
+					<div class="status" v-if="item.status === 1">正在考试</div>
+					<div class="status" v-if="item.status === 2">完成考试</div>
+					<div v-if="item.status !== 2 " class="leaveTime">剩余时间: {{item.leaveTime}}秒</div>
+					<div v-else class="score">得分: {{item.score}}分</div>
+				</div>
+				<div v-if="item.status === 0 " class="exam_div"  @click.stop="goToExamPage(item.id)"> 开始考试 </div>
+				<div v-if="item.status === 1 " class="exam_div" @click.stop="goToExamPage(item.id)"> 继续考试 </div>
 			</div>
-			</div>
-		</ul>
+		</ul> 
 		<ul v-else class="animation_opactiy">
 			<li class="list_back_li" v-for="item in 10" :key="item">
 				<img src="../../images/shopback.svg" class="list_back_svg">
@@ -36,17 +36,16 @@
 <script>
 
 import {mapState} from 'vuex'
-import {getStudyList} from '../../service/study'
+import {getExamList} from 'src/service/exam'
 import {showBack, animate} from 'src/config/mUtils'
 import {loadMore} from './mixin'
 import loading from './loading'
-import ratingStar from 'src/components/common/ratingStar'
 
 export default {
 	data(){
 		return {
-			offset: 0, // 批次加载店铺列表，每次加载10个 limit = 10
-			studyListArr:[], // 租房列表数据
+			offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
+			listArr:[], // 租房列表数据
 			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
 			showBackStatus: false, //显示返回顶部按钮
 			showLoading: true, //显示加载动画
@@ -58,7 +57,6 @@ export default {
 	},
 	components: {
 		loading,
-		ratingStar
 	},
 	// props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect'],
 	mixins: [loadMore],
@@ -72,10 +70,11 @@ export default {
 	methods: {
 		async initData(){
 			//获取数据
-			let res = await getStudyList('123', this.offset);
-			this.studyListArr = [...res];
+			// let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
+			let res = await getExamList('123' ,this.offset);
+			this.listArr = [...res];
 			console.log(res.length)
-			if (res.length < 10) {
+			if (res.length < 20) {
 				this.touchend = true;
 			}
 			this.hideLoading();
@@ -101,40 +100,21 @@ export default {
 			this.showLoading = true;
 			this.preventRepeatReuqest = true;
 
-			//数据的定位加10位
+			//数据的定位加20位
 			console.log('old offset:' + this.offset)
-			this.offset = this.offset + 10;
+			this.offset = this.offset + 20;
 			console.log('new offset:' + this.offset)
-			let res = await getStudyList('123' ,this.offset);
+			// let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
+			let res = await getExamList('123' ,this.offset);
 			console.log(res)
 			this.hideLoading();
-			this.studyListArr = [...this.studyListArr, ...res];
-			//当获取数据小于10，说明没有更多数据，不需要再次请求数据
-			if (res.length < 10) {
+			this.listArr = [...this.listArr, ...res];
+			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
+			if (res.length < 20) {
 				this.touchend = true;
 				return
 			}
 			this.preventRepeatReuqest = false;
-		},
-
-		getNumberList(){
-			const numberList = [];
-			for(let i=0;i<this.studyListArr.length / 2;i++){
-				numberList.push(i)
-			}
-			console.log(numberList)
-			return numberList
-		},
-		getRowList(index){
-			console.log(index)
-			const rowList = []
-			rowList.push(this.studyListArr[index*2])
-			const currentIndex = index * 2 + 1;
-			if(currentIndex < this.studyListArr.length) {
-				rowList.push(this.studyListArr[index*2+1])
-			}
-			console.log(rowList)
-			return rowList
 		},
 		//返回顶部
 		backTop(){
@@ -145,9 +125,9 @@ export default {
 			this.showLoading = false;
 		},
 
-		goToDetailPage(id) {
-			console.log("goToBillPage " + id);
-        	this.$router.push('/study/' + id );
+		goToExamPage(id) {
+			console.log("goToExamPage" + id);
+        	this.$router.push('/exam/' + id );
 		}
 	},
 	watch: {
@@ -158,55 +138,39 @@ export default {
 <style lang="scss" scoped>
 	@import 'src/style/mixin';
 	.list_container{
-		background-color: white;
-		// margin-bottom: 2rem;
-	}
-	.table_div{
-		display: flex;	
-		padding: 0.4rem;
-		.row_div {
-			display:flex;
-        	// border-bottom:1px solid #f1f1f1;
-        	justify-content:space-between;
-			.card_section{
-				border: 0.075rem solid #f1f1f1;
-				@include wh(7.6rem, 7rem);
-				.img{
-					margin-left: 0.2rem;
-					@include wh(7rem, 5rem);
-				}
+		background-color: #fff;
+		.item_div {
+			display: flex;
+			border-bottom: 0.025rem solid #f1f1f1;
+			padding: 0.7rem 0.4rem;
+			.img{
+				@include wh(2.5em, 2.5rem);
+			} 
+			.title_status_leavetime_score_div{
+				margin-left: 0.5rem;
+				@include wh(10.5rem, 2.5rem);
 				.title{
+					@include sc(0.8rem, black)
+				} 
+				.status{
 					margin-top: 0.1rem;
-					margin-left: 0.2rem;
-					@include sc(0.4rem, #666);
-					@include wh(7.2rem, 0.5rem);
-					line-height: 0.5rem;
-					overflow: hidden;
-					text-overflow: ellipsis; 
-					white-space: nowrap;
+					@include sc(0.4rem, gray)
+				} 
+				.leaveTime{
+					margin-top: 0.1rem;
+					@include sc(0.4rem, gray)
+				} 
+				.score{
+					margin-top: 0.1rem;
+					@include sc(0.4rem, gray)
 				}
-				.rating_person_div{
-					display:flex;
-					height: 0.8rem;
-					.rating{
-						margin-top: 0.1rem;
-						margin-left: 0.2rem;
-						@include wh(5.5rem, 0.5rem);
-					}
-					.person_img{
-						margin-top: 0.2rem;
-						@include wh(0.5rem, 0.5rem);
-					} 
-					.person_number_div{
-						margin-top: 0.2rem;
-						margin-left: 0.2rem;
-						@include sc(0.4rem, #666);
-						@include wh(2rem, 0.5rem);
-						line-height: 0.5rem;
-					}
-				}  
+			}   
+			.exam_div{
+				@include wh(2.5rem, 2.5rem);
+				line-height: 2.5rem;
+				@include sc(0.5rem, gray)
 			}
-		}
+		} 
 	}
 	.list_back_li{
 		height: 4.85rem;

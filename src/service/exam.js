@@ -2,7 +2,7 @@ const ALL_LIST = [
   {
     ID: 1,
     title: '试卷01',
-    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
+    imgUrl: 'http://7xrsfo.com1.z0.glb.clouddn.com/exam.png',
     status: 0, //未开始考试
     leaveTime: 30 * 60, //考试剩余时间
     score: 0, //考试分数, 未考和正在考时为0
@@ -123,7 +123,7 @@ const ALL_LIST = [
   {
     ID: 2,
     title: '试卷05',
-    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
+    imgUrl: 'http://7xrsfo.com1.z0.glb.clouddn.com/exam.png',
     status: 1, //正在考试
     leaveTime: 100, //考试剩余时间(秒)
     score: 0, //考试分数, 未考和正在考时为0
@@ -244,8 +244,8 @@ const ALL_LIST = [
   {
     ID: 3,
     title: '试卷03',
-    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
-    status: 3, //完成考试
+    imgUrl: 'http://7xrsfo.com1.z0.glb.clouddn.com/exam.png',
+    status: 2, //完成考试
     leaveTime: 20, //考试剩余时间(秒)
     score: 90, //考试分数, 未考和正在考时为0
     examination: [
@@ -365,7 +365,7 @@ const ALL_LIST = [
   {
     ID: 4,
     title: '试卷04',
-    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2313411144,683196051&fm=27&gp=0.jpg',
+    imgUrl: 'http://7xrsfo.com1.z0.glb.clouddn.com/exam.png',
     status: 0,
     leaveTime: 30 * 60, //考试剩余时间
     score: 0, //考试分数, 未考和正在考时为0
@@ -485,14 +485,12 @@ const ALL_LIST = [
 
 
 ]
-export const getExamList = (user_id, status, offset) => {
+export const getExamList = (user_id, offset) => {
   console.log('----%%%%%-----')
   console.log(offset)
   const limit = 20
   return new Promise(function (reslove, reject) {
-    const list = ALL_LIST.filter(function (study) {
-      return study.status === parseInt(status)
-    })
+    const list = ALL_LIST
     console.log(list.length)
     reslove(list.slice(offset, offset + limit))
   })

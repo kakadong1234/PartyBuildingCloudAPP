@@ -7,6 +7,8 @@ const lprofile = r => require.ensure([], () => r(require('../page/profile/lprofi
 const tenementDetail = r => require.ensure([], () => r(require('../page/tenement/children/tenementDetail')), 'tenementDetail')
 const column = r => require.ensure([], () => r(require('../page/column/index')), 'column')
 const columnDetail = r => require.ensure([], () => r(require('../page/column/columnDetail')), 'columnDetail')
+const studyHistory = r => require.ensure([], () => r(require('../page/study/studyHistory')), 'studyHistory')
+const examDetail = r => require.ensure([], () => r(require('../page/exam/examDetail')), 'examDetail')
 
 const cadre = r => require.ensure([], () => r(require('../page/cadre/index')), 'cadre')
 const branchDetail = r => require.ensure([], () => r(require('../page/partyFlag/branchDetail')), 'branchDetail')
@@ -102,6 +104,11 @@ export default [{
             path: '/study',
             component: study
         },
+        // 学习历史页面
+        {
+            path: '/studyHistory',
+            component: studyHistory
+        },
 
         //课程详情
         {
@@ -114,6 +121,12 @@ export default [{
             path: '/exam',
             component: exam
         },  
+
+        //考卷页面
+        {
+            path: '/exam/:id',
+            component: examDetail
+        }, 
         //干部管理
         {
             path: '/cadre',

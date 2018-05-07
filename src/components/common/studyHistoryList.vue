@@ -6,11 +6,6 @@
 				<section class='card_section' @click="goToDetailPage(item.ID)">
 					<img :src="item.imgUrl" class="img">
 					<h4 class="title">{{item.title}}</h4>
-					<div class="rating_person_div"> 
-						<rating-star :rating="item.rating" class="rating"></rating-star>
-						<img src="../../images/person.png" class="person_img">
-						<div class="person_number_div"> {{item.personNumber}}</div>
-					</div>
 				</section>
 			</div>
 			</div>
@@ -36,7 +31,7 @@
 <script>
 
 import {mapState} from 'vuex'
-import {getStudyList} from '../../service/study'
+import {getStudyHistoryList} from '../../service/studyHistory'
 import {showBack, animate} from 'src/config/mUtils'
 import {loadMore} from './mixin'
 import loading from './loading'
@@ -72,7 +67,7 @@ export default {
 	methods: {
 		async initData(){
 			//获取数据
-			let res = await getStudyList('123', this.offset);
+			let res = await getStudyHistoryList('123', this.offset);
 			this.studyListArr = [...res];
 			console.log(res.length)
 			if (res.length < 10) {
@@ -105,7 +100,7 @@ export default {
 			console.log('old offset:' + this.offset)
 			this.offset = this.offset + 10;
 			console.log('new offset:' + this.offset)
-			let res = await getStudyList('123' ,this.offset);
+			let res = await getStudyHistoryList('123' ,this.offset);
 			console.log(res)
 			this.hideLoading();
 			this.studyListArr = [...this.studyListArr, ...res];
@@ -170,7 +165,7 @@ export default {
         	justify-content:space-between;
 			.card_section{
 				border: 0.075rem solid #f1f1f1;
-				@include wh(7.6rem, 7rem);
+				@include wh(7.6rem, 6.6rem);
 				.img{
 					margin-left: 0.2rem;
 					@include wh(7rem, 5rem);
@@ -185,26 +180,6 @@ export default {
 					text-overflow: ellipsis; 
 					white-space: nowrap;
 				}
-				.rating_person_div{
-					display:flex;
-					height: 0.8rem;
-					.rating{
-						margin-top: 0.1rem;
-						margin-left: 0.2rem;
-						@include wh(5.5rem, 0.5rem);
-					}
-					.person_img{
-						margin-top: 0.2rem;
-						@include wh(0.5rem, 0.5rem);
-					} 
-					.person_number_div{
-						margin-top: 0.2rem;
-						margin-left: 0.2rem;
-						@include sc(0.4rem, #666);
-						@include wh(2rem, 0.5rem);
-						line-height: 0.5rem;
-					}
-				}  
 			}
 		}
 	}

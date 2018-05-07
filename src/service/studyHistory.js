@@ -238,7 +238,7 @@ const ALL_LIST =[
     des: 'des15'
   },
 ]
-export const getStudyList = (user_id, offset) => {
+export const getStudyHistoryList = (user_id, offset) => {
 	console.log(offset)
 	const limit = 10
 	return new Promise(function(reslove, reject){
