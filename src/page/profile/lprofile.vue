@@ -46,7 +46,7 @@
             </section> -->
             <div class="list_div">
                 <div class="item_div" v-for="item in listArr" :key="item.title" @click.stop="goToLink(item.link)">
-                    <img class="img" src="../../images/fenxiang.png">
+                    <img class="img" :src="item.imgUrl">
                     <div class="title">{{item.title}}</div>
                 </div>
             </div>
@@ -80,52 +80,52 @@ export default {
             listArr:[
                 {
                     title: '信息提醒',
-                    imgUrl: '',
+                    imgUrl: require('../../images/message.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '工作调度',
-                    imgUrl: '',
+                    imgUrl: require('../../images/work.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '在线会议',
-                    imgUrl: '',
+                    imgUrl: require('../../images/meeting.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '考评打分',
-                    imgUrl: '',
+                    imgUrl: require('../../images/kaoping.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '意见反馈',
-                    imgUrl: '',
+                    imgUrl: require('../../images/fankui.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '直播申请',
-                    imgUrl: '',
+                    imgUrl: require('../../images/live.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '请假申请',
-                    imgUrl: '',
+                    imgUrl: require('../../images/qingjia.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '工作审批',
-                    imgUrl: '',
+                    imgUrl: require('../../images/shenpi.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '信息上报审批',
-                    imgUrl: '',
+                    imgUrl: require('../../images/up.png'),
                     link: 'http://www.baidu.com'
                 },
                 {
                     title: '设置',
-                    imgUrl: '',
+                    imgUrl: require('../../images/setting.png'),
                     link: 'http://www.baidu.com'
                 }
             ]
@@ -303,17 +303,21 @@ export default {
 //         }
 //    }
    .list_div{
+       background-color: #fff;
     .item_div{
-        margin-top:.4rem;
-        margin-left: 0.2rem;
+        margin-top:.1rem;
+        margin-left: 0.4rem;
+        margin-bottom:.1rem;
         display:flex; 
+        border-bottom: 0.025rem solid #f1f1f1;
+		padding: 0.2rem 0.2rem;
         .img{
-            @include wh(1.5rem, 1.5rem)
+            @include wh(1.2rem, 1.2rem)
         }
         .title{
-            @include sc(0.5rem, gray);
-            @include wh(5rem, 1.5rem);
-            line-height: 1.5rem;
+            @include sc(0.65rem, gray);
+            @include wh(5rem, 1.2rem);
+            line-height: 1.2rem;
             margin-left: 0.5rem;
         }
     }
