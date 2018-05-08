@@ -208,10 +208,11 @@ export default {
             padding: .666667rem .6rem;
             .privateImage{
                 display:inline-block;
-                @include wh(2.5rem,2.5rem);
+                @include wh(2.5rem,5rem);
                 border-radius:50%;
                 vertical-align:middle;
                 .privateImage-svg{
+                    margin-top: 1.2rem;
                     background:$fc;
                     border-radius:50%;
                     @include wh(2.5rem,2.5rem);
