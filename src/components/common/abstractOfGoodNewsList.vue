@@ -127,17 +127,19 @@ export default {
 			}
 			.title_abstract_div{
 				margin-left: 0.5rem;
-				@include wh(10.5rem, 2.5rem);
+				width: 10.5rem;
+				// @include wh(10.5rem, 2.5rem);
 				.title{
 					@include sc(0.8rem, black)
 				} 
 				.abstract{
 					margin-top: 0.1rem;
 					@include sc(0.4rem, gray);
-					display: -webkit-box;
-					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 3;
-					overflow: hidden;
+					position:relative;
+					line-height:1.2em;
+					/*设置容器高度为4倍行高就是显示4行*/
+					height:4.8em;
+					overflow:hidden;
 				}
 			}   
 		} 
