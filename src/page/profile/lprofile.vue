@@ -28,7 +28,7 @@
                     </span>
                 </router-link>
             </section>
-            <section class="info-data">
+            <!-- <section class="info-data">
                 <ul class="clear">
                     <router-link to="/balance" tag="li" class="info-data-link">
                         <span class="info-data-top"><b>{{parseInt(balance).toFixed(2)}}</b>元</span>
@@ -43,93 +43,13 @@
                         <span class="info-data-bottom">我的积分</span>
                     </router-link>
                 </ul>
-            </section>
-            <section class="profile-1reTe">
-                <!-- TODO: 只有房东可用看到 -->
-                <!-- 我的房源 -->
-                <router-link to='/order' class="myorder">
-                    <aside>
-                        <svg fill="#4aa5f0">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#order"></use>
-                        </svg>
-                    </aside>
-                    <div class="myorder-div">
-                        <span>学习历史</span>
-                        <span class="myorder-divsvg">
-                            <svg fill="#bbb">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                            </svg>
-                        </span>
-                    </div>
-                </router-link>
-
-                <!-- 积分商城 -->
-                <!-- <a href='https://home.m.duiba.com.cn/#/chome/index' class="myorder">
-                    <aside>
-                        <svg fill="#fc7b53">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#point"></use>
-                        </svg>
-                    </aside>
-                    <div class="myorder-div">
-                        <span>积分商城</span>
-                        <span class="myorder-divsvg">
-                            <svg fill="#bbb">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                            </svg>
-                        </span>
-                    </div>
-                </a> -->
-                <!-- 饿了么会员卡 -->
-                <!-- <router-link to='/vipcard' class="myorder">
-                    <aside>
-                        <svg fill="#ffc636">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#vip"></use>
-                        </svg>
-                    </aside>
-                    <div class="myorder-div">
-                        <span>饿了么会员卡</span>
-                        <span class="myorder-divsvg">
-                            <svg fill="#bbb">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                            </svg>
-                        </span>
-                    </div>
-                </router-link> -->
-            </section>
-            <section class="profile-1reTe">
-                <!-- 服务中心 -->
-                <router-link to='/service' class="myorder">
-                    <aside>
-                        <svg fill="#4aa5f0">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#service"></use>
-                        </svg>
-                    </aside>
-                    <div class="myorder-div">
-                        <span>服务中心</span>
-                        <span class="myorder-divsvg">
-                            <svg fill="#bbb">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                            </svg>
-                        </span>
-                    </div>
-                </router-link>
-                <!-- 下载饿了么APP -->
-                <!-- <router-link to='/download' class="myorder">
-                    <aside>
-                        <svg fill="#3cabff">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#download"></use>
-                        </svg>
-                    </aside>
-                    <div class="myorder-div" style="border-bottom:0;">
-                        <span>下载饿了么APP</span>
-                        <span class="myorder-divsvg">
-                            <svg fill="#bbb">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                            </svg>
-                        </span>
-                    </div>
-                </router-link> -->
-            </section>
+            </section> -->
+            <div class="list_div">
+                <div class="item_div" v-for="item in listArr" :key="item.title" @click.stop="goToLink(item.link)">
+                    <img class="img" src="../../images/fenxiang.png">
+                    <div class="title">{{item.title}}</div>
+                </div>
+            </div>
         </section>
         <!-- <foot-guide selectedItem='profile'></foot-guide> -->
         <transition name="router-slid" mode="out-in">
@@ -157,6 +77,58 @@ export default {
             pointNumber : 0,       //积分数
             avatar: '',             //头像地址
             imgBaseUrl,
+            listArr:[
+                {
+                    title: '信息提醒',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '工作调度',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '在线会议',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '考评打分',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '意见反馈',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '直播申请',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '请假申请',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '工作审批',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '信息上报审批',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                },
+                {
+                    title: '设置',
+                    imgUrl: '',
+                    link: 'http://www.baidu.com'
+                }
+            ]
         }
     },
     mounted(){
@@ -202,6 +174,9 @@ export default {
                 this.mobile = '暂无绑定手机号';
             }
         },
+        goToLink(link){
+            console.log("goToLink:" + link)
+        }
     },
     watch: {
         userInfo: function (value){
@@ -229,7 +204,7 @@ export default {
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
-            background:$blue;
+            background:gray;
             padding: .666667rem .6rem;
             .privateImage{
                 display:inline-block;
@@ -276,96 +251,73 @@ export default {
             }
         }
    }
-   .info-data{
-        width:100%;
-        background:$fc;
-        box-sizing: border-box;
-        ul{
-            .info-data-link{
-                float:left;
-                width:33.33%;
-                display:inline-block;
-                border-right:1px solid #f1f1f1;
-                span{
-                    display:block;
-                    width:100%;
-                    text-align:center;
-                }
-                .info-data-top{
-                    @include sc(.55rem,#333);
-                    padding: .853333rem 0 .453333rem;
-                    b{
-                        display:inline-block;
-                        @include sc(1.2rem,#f90);
-                        font-weight:700;
-                        line-height:1rem;
-                        font-family: Helvetica Neue,Tahoma;
-                    }
-                }
-                .info-data-bottom{
-                    @include sc(.57333rem,#666);
-                    font-weight:400;
-                    padding-bottom:.453333rem;
+//    .info-data{
+//         width:100%;
+//         background:$fc;
+//         box-sizing: border-box;
+//         ul{
+//             .info-data-link{
+//                 float:left;
+//                 width:33.33%;
+//                 display:inline-block;
+//                 border-right:1px solid #f1f1f1;
+//                 span{
+//                     display:block;
+//                     width:100%;
+//                     text-align:center;
+//                 }
+//                 .info-data-top{
+//                     @include sc(.55rem,#333);
+//                     padding: .853333rem 0 .453333rem;
+//                     b{
+//                         display:inline-block;
+//                         @include sc(1.2rem,#f90);
+//                         font-weight:700;
+//                         line-height:1rem;
+//                         font-family: Helvetica Neue,Tahoma;
+//                     }
+//                 }
+//                 .info-data-bottom{
+//                     @include sc(.57333rem,#666);
+//                     font-weight:400;
+//                     padding-bottom:.453333rem;
 
-                }
-            }
-            .info-data-link:nth-of-type(2){
-                .info-data-top{
-                    b{
-                        color:#ff5f3e;
-                    }
-                }
+//                 }
+//             }
+//             .info-data-link:nth-of-type(2){
+//                 .info-data-top{
+//                     b{
+//                         color:#ff5f3e;
+//                     }
+//                 }
 
-            }
-            .info-data-link:nth-of-type(3){
-                border:0;
-                .info-data-top{
-                    b{
-                        color:#6ac20b;
-                    }
-                }
-            }
-        }
-   }
-   .profile-1reTe{
+//             }
+//             .info-data-link:nth-of-type(3){
+//                 border:0;
+//                 .info-data-top{
+//                     b{
+//                         color:#6ac20b;
+//                     }
+//                 }
+//             }
+//         }
+//    }
+   .list_div{
+    .item_div{
         margin-top:.4rem;
-        background:$fc;
-        .myorder{
-            padding-left:1.6rem;
-            display:flex;
-            align-items: center;
-            aside{
-                @include wh(.7rem,.7rem);
-                margin-left:-.866667rem;
-                margin-right:.266667rem;
-                display:flex;
-                align-items: center;
-                svg{
-                    @include wh(100%,100%);
-                }
-            }
-            .myorder-div{
-                width:100%;
-                border-bottom:1px solid #f1f1f1;
-                padding:.433333rem .266667rem .433333rem 0;
-                @include sc(.7rem,#333);
-                display:flex;
-                justify-content:space-between;
-                span{
-                    display:block;
-                }
-                .myorder-divsvg{
-                    @include wh(.46667rem,.466667rem);
-                    svg{
-                        @include wh(100%,100%);
-                    }
-                }
-            }
+        margin-left: 0.2rem;
+        display:flex; 
+        .img{
+            @include wh(1.5rem, 1.5rem)
         }
-        .myorder:nth-of-type(3) .myorder-div{
-            border:0;
+        .title{
+            @include sc(0.5rem, gray);
+            @include wh(5rem, 1.5rem);
+            line-height: 1.5rem;
+            margin-left: 0.5rem;
         }
     }
+   }
     .router-slid-enter-active, .router-slid-leave-active {
         transition: all .4s;
     }
