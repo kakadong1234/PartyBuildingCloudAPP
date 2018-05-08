@@ -11,16 +11,12 @@
 			<div v-for="item in listArr" :key="item.id" class="item_div" @click.stop="goToDetailPage(item.id)">
 				<div class="img_date_div">
 					<img :src="item.imgUrl" class="img">
-					<div class="date">日期: 2018-03-22</div>
+					<div class="date">日期: {{item.date}}</div>
 				</div>
-					<div class="title_status_leavetime_score_div"> 
-						<div class="title">{{item.title}}</div>
-						<div class="status" v-if="item.status === 0">未开始考试</div>
-						<div class="status" v-if="item.status === 1">正在考试</div>
-						<div class="status" v-if="item.status === 2">完成考试</div>
-						<div v-if="item.status !== 2 " class="leaveTime">剩余时间: {{item.leaveTime}}秒</div>
-						<div v-else class="score">得分: {{item.score}}分</div>
-					</div>
+				<div class="title_abstract_div"> 
+					<div class="title">{{item.title}}</div>
+					<div class="abstract">{{item.abstract}}</div>
+				</div>
 			</div>
 		</div>
 		<div ref="abc" style="background-color: red;"></div>
@@ -33,7 +29,7 @@
 <script>
 
 import {mapState} from 'vuex'
-import {getExamList} from 'src/service/exam'
+import {getNewsList} from 'src/service/news'
 import loading from './loading'
 
 export default {
@@ -60,8 +56,7 @@ export default {
 	methods: {
 		async initData(){
 			//获取数据
-			console.log('ababadbabababababfs')
-			let res = await getExamList('123' ,0);
+			let res = await getNewsList('123' ,0, true);
 			this.listArr = [...res];
 			if(this.limit){
 				this.listArr = this.listArr.slice(0, this.limit)
@@ -74,9 +69,13 @@ export default {
 			this.showLoading = false;
 		},
 
-		goToExamPage(id) {
-			console.log("goToExamPage" + id);
-        	this.$router.push('/exam/' + id );
+		goToAllList(){
+			console.log("goToAllList");
+		},
+
+		goToDetailPage(id) {
+			console.log("goToDetailPage" + id);
+        	// this.$router.push('/exam/' + id );
 		}
 	},
 	watch: {
@@ -115,7 +114,7 @@ export default {
 		.item_div {
 			display: flex;
 			border-bottom: 0.025rem solid #f1f1f1;
-			padding: 0.7rem 0.4rem;
+			padding: 0.2rem 0.2rem;
 			.img_date_div{
 				.img{
 					@include wh(5rem, 2.5rem);
@@ -126,23 +125,19 @@ export default {
 					text-align: center
 				}
 			}
-			.title_status_leavetime_score_div{
+			.title_abstract_div{
 				margin-left: 0.5rem;
 				@include wh(10.5rem, 2.5rem);
 				.title{
 					@include sc(0.8rem, black)
 				} 
-				.status{
+				.abstract{
 					margin-top: 0.1rem;
-					@include sc(0.4rem, gray)
-				} 
-				.leaveTime{
-					margin-top: 0.1rem;
-					@include sc(0.4rem, gray)
-				} 
-				.score{
-					margin-top: 0.1rem;
-					@include sc(0.4rem, gray)
+					@include sc(0.4rem, gray);
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 3;
+					overflow: hidden;
 				}
 			}   
 		} 
