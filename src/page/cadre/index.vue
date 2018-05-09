@@ -66,15 +66,7 @@ export default {
     },
 
 	mounted(){
-        getAppList().then(res => {
-            res.map(function(app){// TODO; corpId 要从缓存中拿
-                const corpid = 'ding31148f160c24897635c2f4657eb6378f';
-                app.targetUrl = 'dingtalk://dingtalkclient/action/switchtab?index=2&name=work&scene=1&corpid=' + corpid +'agentid=' + app.agentId;
-                return app;    
-            })
-            this.appList = res;
-            console.log(this.appList)
-          })
+        this.initData()
         //开始钉钉相关设置
         // this.startDD()
     },
@@ -98,47 +90,56 @@ export default {
             window.location.reload();
         },
 
-        startDD(){
-            console.log('--startDD')
-            ddConfig().then(config => {
-                console.log(config)
-                config.jsApiList = [
-                    'runtime.info',
-                    'biz.user.get',
-                    'biz.contact.choose',
-                    'biz.telephone.call',
-                    'biz.ding.post'
-                ]
-                console.log(location.href)
-                dd.config(config);
-                dd.error(function(err) {
-                    alert('href is ' + location.href + ', dd error: ' + JSON.stringify(err));  
-                }); 
-                console.log('start ready')
-                dd.ready(function() {
-                    alert('--dd requestAuthCode')
-                    console.log('--dd requestAuthCode')
-                    dd.runtime.permission.requestAuthCode({
-                        corpId: config.corpid,
-                        onSuccess: function(result) {
-                            alert('--success result is ' + JSON.stringify(result))
-                            console.log('--success')
-                            console.log(result)
-                            const code = result.code
-                            //get userID by code
-                            getDdUserID(code).then(res => {
-                                console.log(res)
-                            })  
-                        },
-                        onFail : function(err) {
-                            console.log('--fail')
-                            //TODO: fail 处理
-                            console.log(err)
-                        }
-                    });
-                })
+        async initData(){
+            const res = await getAppList()
+            this.appList = res.map(function(app){// TODO; corpId 要从缓存中拿
+                const corpid = 'ding31148f160c24897635c2f4657eb6378f';
+                app.targetUrl = 'dingtalk://dingtalkclient/action/switchtab?index=2&name=work&scene=1&corpid=' + corpid +'agentid=' + app.agentId;
+                return app;    
             })
-        }
+            console.log(this.appList)
+        },
+        // startDD(){
+        //     console.log('--startDD')
+        //     ddConfig().then(config => {
+        //         console.log(config)
+        //         config.jsApiList = [
+        //             'runtime.info',
+        //             'biz.user.get',
+        //             'biz.contact.choose',
+        //             'biz.telephone.call',
+        //             'biz.ding.post'
+        //         ]
+        //         console.log(location.href)
+        //         dd.config(config);
+        //         dd.error(function(err) {
+        //             alert('href is ' + location.href + ', dd error: ' + JSON.stringify(err));  
+        //         }); 
+        //         console.log('start ready')
+        //         dd.ready(function() {
+        //             alert('--dd requestAuthCode')
+        //             console.log('--dd requestAuthCode')
+        //             dd.runtime.permission.requestAuthCode({
+        //                 corpId: config.corpid,
+        //                 onSuccess: function(result) {
+        //                     alert('--success result is ' + JSON.stringify(result))
+        //                     console.log('--success')
+        //                     console.log(result)
+        //                     const code = result.code
+        //                     //get userID by code
+        //                     getDdUserID(code).then(res => {
+        //                         console.log(res)
+        //                     })  
+        //                 },
+        //                 onFail : function(err) {
+        //                     console.log('--fail')
+        //                     //TODO: fail 处理
+        //                     console.log(err)
+        //                 }
+        //             });
+        //         })
+        //     })
+        // }
     }
 }
 

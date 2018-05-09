@@ -64,23 +64,7 @@ export default {
     },
 
 	mounted(){
-        getColumnList().then(res => {
-            const data = res.map(function(column){
-                console.log(column)
-                column.link = '/column/' + column.id + '?columnName=' + column.name
-                return column
-            });
-            this.xi_column = data.find(function(column){
-                return column.name === "社会主义新时代"
-            })
-            this.columnList = data.filter(function(column){
-                return column.name !== "社会主义新时代"
-            })
-            console.log(this.xi_column)
-            console.log(this.columnList)
-          })
-        //开始钉钉相关设置
-        // this.startDD()
+        this.initData()
     },
 
     components:{
@@ -102,47 +86,64 @@ export default {
             window.location.reload();
         },
 
-        startDD(){
-            console.log('--startDD')
-            ddConfig().then(config => {
-                console.log(config)
-                config.jsApiList = [
-                    'runtime.info',
-                    'biz.user.get',
-                    'biz.contact.choose',
-                    'biz.telephone.call',
-                    'biz.ding.post'
-                ]
-                console.log(location.href)
-                dd.config(config);
-                dd.error(function(err) {
-                    alert('href is ' + location.href + ', dd error: ' + JSON.stringify(err));  
-                }); 
-                console.log('start ready')
-                dd.ready(function() {
-                    alert('--dd requestAuthCode')
-                    console.log('--dd requestAuthCode')
-                    dd.runtime.permission.requestAuthCode({
-                        corpId: config.corpid,
-                        onSuccess: function(result) {
-                            alert('--success result is ' + JSON.stringify(result))
-                            console.log('--success')
-                            console.log(result)
-                            const code = result.code
-                            //get userID by code
-                            getDdUserID(code).then(res => {
-                                console.log(res)
-                            })  
-                        },
-                        onFail : function(err) {
-                            console.log('--fail')
-                            //TODO: fail 处理
-                            console.log(err)
-                        }
-                    });
-                })
+        async initData() {
+            const res = await getColumnList()
+            const data = res.map(function(column){
+                console.log(column)
+                column.link = '/column/' + column.id + '?columnName=' + column.name
+                return column
+            });
+            this.xi_column = data.find(function(column){
+                return column.name === "社会主义新时代"
             })
+            this.columnList = data.filter(function(column){
+                return column.name !== "社会主义新时代"
+            })
+            console.log(this.xi_column)
+            console.log(this.columnList)
         },
+
+        // startDD(){
+        //     console.log('--startDD')
+        //     ddConfig().then(config => {
+        //         console.log(config)
+        //         config.jsApiList = [
+        //             'runtime.info',
+        //             'biz.user.get',
+        //             'biz.contact.choose',
+        //             'biz.telephone.call',
+        //             'biz.ding.post'
+        //         ]
+        //         console.log(location.href)
+        //         dd.config(config);
+        //         dd.error(function(err) {
+        //             alert('href is ' + location.href + ', dd error: ' + JSON.stringify(err));  
+        //         }); 
+        //         console.log('start ready')
+        //         dd.ready(function() {
+        //             alert('--dd requestAuthCode')
+        //             console.log('--dd requestAuthCode')
+        //             dd.runtime.permission.requestAuthCode({
+        //                 corpId: config.corpid,
+        //                 onSuccess: function(result) {
+        //                     alert('--success result is ' + JSON.stringify(result))
+        //                     console.log('--success')
+        //                     console.log(result)
+        //                     const code = result.code
+        //                     //get userID by code
+        //                     getDdUserID(code).then(res => {
+        //                         console.log(res)
+        //                     })  
+        //                 },
+        //                 onFail : function(err) {
+        //                     console.log('--fail')
+        //                     //TODO: fail 处理
+        //                     console.log(err)
+        //                 }
+        //             });
+        //         })
+        //     })
+        // },
 
         goToDetail(link){
             this.$router.push(link);

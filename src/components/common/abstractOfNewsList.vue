@@ -3,9 +3,9 @@
 		<div v-if="listArr.length">
 			<div class="list_header_div"> 
 				<div class="list_title_div"> 党建新闻 </div>
-					<div class="more_div" @click.stop="goToAllList">
-						<div class="more_txt_div"> 更多 </div>
-						<img class="more_img" src="../../images/more.png">
+				<div class="more_div" @click.stop="goToAllList">
+					<div class="more_txt_div"> 更多 </div>
+					<img class="more_img" src="../../images/more.png">
 				</div>
 			</div>
 			<div v-for="item in listArr" :key="item.id" class="item_div" @click.stop="goToDetailPage(item.id)">
